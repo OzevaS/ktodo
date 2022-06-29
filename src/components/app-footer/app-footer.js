@@ -12,11 +12,7 @@ function AppFooter(props) {
     <footer className="footer">
       <span className="todo-count">{`${todoCount} items left`}</span>
       <TasksFilter {...propsFilter} />
-      <button
-        type="button"
-        className="clear-completed"
-        onClick={onDeletedCompleted}
-      >
+      <button type="button" className="clear-completed" onClick={onDeletedCompleted}>
         Clear completed
       </button>
     </footer>

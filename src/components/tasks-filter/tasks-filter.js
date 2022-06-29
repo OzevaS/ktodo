@@ -1,18 +1,18 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import "./tasks-filter.css";
+import './tasks-filter.css';
 
 function toggleActiveButton(e) {
   const list = e.currentTarget;
 
   // eslint-disable-next-line no-restricted-syntax
   for (const li of list.children) {
-    const btn = li.querySelector("button");
-    btn.classList.remove("selected");
+    const btn = li.querySelector('button');
+    btn.classList.remove('selected');
   }
 
-  e.target.classList.add("selected");
+  e.target.classList.add('selected');
 }
 
 function TasksFilter(props) {

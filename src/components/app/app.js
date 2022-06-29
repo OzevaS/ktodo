@@ -112,9 +112,7 @@ export default class App extends React.Component {
   render() {
     const { tasks } = this.state;
 
-    const todoCount = tasks
-      ? tasks.reduce((res, item) => res + (item.done ? 0 : 1), 0)
-      : 0;
+    const todoCount = tasks ? tasks.reduce((res, item) => res + (item.done ? 0 : 1), 0) : 0;
 
     const viewTasks = this.viewTasks();
 

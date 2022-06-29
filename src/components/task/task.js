@@ -1,41 +1,28 @@
-import React from "react";
-import propTypes from "prop-types";
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React from 'react';
+import propTypes from 'prop-types';
 
-import "./task.css";
+import './task.css';
 
-import DistToNow from "../dist-to-now";
+import DistToNow from '../dist-to-now';
 
 function Task(props) {
-  const { label, created, done, onDeleted, onToggleDone, onToggleEdited } =
-    props;
+  const { label, created, done, onDeleted, onToggleDone, onToggleEdited } = props;
 
-  let classNames = "task";
+  let classNames = 'task';
   if (done) {
-    classNames += " completed";
+    classNames += ' completed';
   }
 
   return (
     <li className={classNames}>
       <div className="view">
-        <input
-          type="checkbox"
-          className="toggle"
-          checked={done}
-          onChange={onToggleDone}
-        />
+        <input type="checkbox" className="toggle" checked={done} onChange={onToggleDone} />
         <label>
           <span className="description">{label}</span>
           <DistToNow created={created} />
-          <button
-            type="button"
-            className="icon icon-edit"
-            onClick={onToggleEdited}
-          />
-          <button
-            type="button"
-            className="icon icon-destroy"
-            onClick={onDeleted}
-          />
+          <button type="button" className="icon icon-edit" onClick={onToggleEdited} />
+          <button type="button" className="icon icon-destroy" onClick={onDeleted} />
         </label>
       </div>
     </li>
@@ -43,7 +30,7 @@ function Task(props) {
 }
 
 Task.defaultProps = {
-  label: "",
+  label: '',
   created: new Date(),
   done: false,
   onDeleted: () => {},
