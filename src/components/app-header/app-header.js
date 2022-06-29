@@ -1,9 +1,9 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import NewTaskForm from "../new-task-form";
+import NewTaskForm from '../new-task-form';
 
-import "./app-header.css";
+import './app-header.css';
 
 function AppHeader(props) {
   const { onAdd } = props;

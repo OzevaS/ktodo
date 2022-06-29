@@ -1,9 +1,9 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import TasksFilter from "../tasks-filter";
+import TasksFilter from '../tasks-filter';
 
-import "./app-footer.css";
+import './app-footer.css';
 
 function AppFooter(props) {
   const { todoCount, onDeletedCompleted, ...propsFilter } = props;

@@ -1,8 +1,8 @@
-import React from "react";
-import { formatDistanceToNow } from "date-fns";
-import propTypes from "prop-types";
+import React from 'react';
+import { formatDistanceToNow } from 'date-fns';
+import propTypes from 'prop-types';
 
-import "./dist-to-now.css";
+import './dist-to-now.css';
 
 export default class DistToNow extends React.Component {
   state = {

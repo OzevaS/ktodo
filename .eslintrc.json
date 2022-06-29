@@ -4,10 +4,12 @@
     "es2021": true
   },
   "extends": [
-    "eslint:recommended", 
-    "plugin:react-hooks/recommended",
+    "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/recommended",
+    "airbnb",
     "prettier"
   ],
   "parserOptions": {
@@ -17,15 +19,22 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "prettier"
-  ],
+  "plugins": ["react", "prettier"],
   "rules": {
-    "semi":"error",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "linebreak-style": "off",
+    "destructuring-assignment": "off",
+    "semi": "error",
     "no-console": "warn",
     "no-plusplus": "off",
     "eol-last": "off",
-    "max-len": ["error", 150, {"ignoreUrls": true}]
+    "max-len": ["error", 150, { "ignoreUrls": true }],
+    "react/destructuring-assignment": "off",
+    "react/state-in-constructor": "off",
+    "react/static-property-placement": "off",
+    "react/jsx-props-no-spreading": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/control-has-associated-label": "off"
   }
 }

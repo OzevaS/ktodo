@@ -1,11 +1,11 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import "./new-task-form.css";
+import './new-task-form.css';
 
 export default class NewTaskForm extends React.Component {
   state = {
-    text: "",
+    text: '',
   };
 
   static defaultProps = {
@@ -27,7 +27,7 @@ export default class NewTaskForm extends React.Component {
     this.props.onAdd(this.state.text);
 
     this.setState({
-      text: "",
+      text: '',
     });
   };
 
@@ -40,7 +40,6 @@ export default class NewTaskForm extends React.Component {
           type="text"
           className="new-todo"
           placeholder="What needs to be done?"
-          autoFocus
           onChange={this.onChange}
           value={text}
         />

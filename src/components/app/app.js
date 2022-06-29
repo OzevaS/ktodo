@@ -1,15 +1,23 @@
-import React from "react";
+import React from 'react';
 
-import AppHeader from "../app-header";
-import TaskList from "../task-list/task-list";
-import AppFooter from "../app-footer";
+import AppHeader from '../app-header';
+import TaskList from '../task-list/task-list';
+import AppFooter from '../app-footer';
 
-import "./app.css";
+import './app.css';
+
+function toggleProperty(arr, id, propName) {
+  const newItems = arr.map((item) => ({ ...item }));
+  const searchItem = newItems.find((item) => item.id === id);
+  searchItem[propName] = !searchItem[propName];
+
+  return newItems;
+}
 
 export default class App extends React.Component {
   state = {
     tasks: [],
-    filter: "all",
+    filter: 'all',
   };
 
   tempId = 0;
@@ -35,7 +43,7 @@ export default class App extends React.Component {
   };
 
   addTask = (text) => {
-    if (text === "") return;
+    if (text === '') return;
 
     this.setState(({ tasks }) => {
       const newItem = this.createTodoItem(text);
@@ -48,41 +56,33 @@ export default class App extends React.Component {
     });
   };
 
-  toggleProperty(arr, id, propName) {
-    const newItems = arr.map((item) => ({ ...item }));
-    const searchItem = newItems.find((item) => item.id === id);
-    searchItem[propName] = !searchItem[propName];
-
-    return newItems;
-  }
-
   onToggleDone = (id) => {
     this.setState(({ tasks }) => ({
-      tasks: this.toggleProperty(tasks, id, "done"),
+      tasks: toggleProperty(tasks, id, 'done'),
     }));
   };
 
   onToggleEdited = (id) => {
     this.setState(({ tasks }) => ({
-      tasks: this.toggleProperty(tasks, id, "edited"),
+      tasks: toggleProperty(tasks, id, 'edited'),
     }));
   };
 
   onShowAll = () => {
     this.setState({
-      filter: "all",
+      filter: 'all',
     });
   };
 
   onShowActive = () => {
     this.setState({
-      filter: "active",
+      filter: 'active',
     });
   };
 
   onShowCompleted = () => {
     this.setState({
-      filter: "completed",
+      filter: 'completed',
     });
   };
 
@@ -98,11 +98,11 @@ export default class App extends React.Component {
   viewTasks() {
     const { tasks, filter } = this.state;
     switch (filter) {
-      case "all":
+      case 'all':
         return tasks;
-      case "active":
+      case 'active':
         return tasks.filter((item) => !item.done);
-      case "completed":
+      case 'completed':
         return tasks.filter((item) => item.done);
       default:
         return null;

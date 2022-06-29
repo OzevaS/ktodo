@@ -1,9 +1,9 @@
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
-import Task from "../task/task";
+import Task from '../task/task';
 
-import "./task-list.css";
+import './task-list.css';
 
 function TaskList({ tasks, onDeleted, onToggleDone, onToggleEdited }) {
   const tasksElems = tasks

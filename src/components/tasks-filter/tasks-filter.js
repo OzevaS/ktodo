@@ -6,6 +6,7 @@ import "./tasks-filter.css";
 function toggleActiveButton(e) {
   const list = e.currentTarget;
 
+  // eslint-disable-next-line no-restricted-syntax
   for (const li of list.children) {
     const btn = li.querySelector("button");
     btn.classList.remove("selected");
@@ -18,6 +19,7 @@ function TasksFilter(props) {
   const { onShowAll, onShowActive, onShowCompleted } = props;
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <ul className="filters" onClick={toggleActiveButton}>
       <li>
         <button type="button" className="selected" onClick={onShowAll}>
