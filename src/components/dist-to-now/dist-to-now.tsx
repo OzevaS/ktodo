@@ -1,22 +1,24 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
-import propTypes from 'prop-types';
 
 import './dist-to-now.css';
 
-export default class DistToNow extends React.Component {
+interface DistToNowState {
+  idInterval: NodeJS.Timer | null;
+}
+
+interface DistToNowProps {
+  created: Date;
+  intervalTime?: number;
+}
+
+export default class DistToNow extends React.Component<DistToNowProps, DistToNowState> {
   state = {
     idInterval: null,
   };
 
   static defaultProps = {
-    created: new Date(),
     intervalTime: 5000,
-  };
-
-  static propTypes = {
-    created: propTypes.instanceOf(Date),
-    intervalTime: propTypes.number,
   };
 
   componentDidMount() {
@@ -28,10 +30,12 @@ export default class DistToNow extends React.Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.idInterval);
+    const  {idInterval} = this.state;
+    if (idInterval !== null)
+      clearInterval(idInterval);
   }
 
-  update(id) {
+  update(id: NodeJS.Timer) {
     this.setState({
       idInterval: id,
     });

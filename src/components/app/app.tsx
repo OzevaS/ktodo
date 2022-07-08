@@ -3,26 +3,34 @@ import React from 'react';
 import AppHeader from '../app-header';
 import TaskList from '../task-list/task-list';
 import AppFooter from '../app-footer';
-
 import './app.css';
+import { ITask } from '../../types';
 
-function toggleProperty(arr, id, propName) {
+function toggleProperty(arr: ITask[], id: number, propName: keyof typeof arr[0]) {
   const newItems = arr.map((item) => ({ ...item }));
+
   const searchItem = newItems.find((item) => item.id === id);
-  searchItem[propName] = !searchItem[propName];
+  if (searchItem && typeof searchItem[propName] === 'boolean') {
+    (searchItem[propName] as boolean) = !searchItem[propName];
+  }
 
   return newItems;
 }
 
-export default class App extends React.Component {
-  state = {
+interface AppState {
+  tasks: ITask[];
+  filter: string;
+}
+
+export default class App extends React.Component<Record<string, never>, AppState> {
+  state: AppState = {
     tasks: [],
     filter: 'all',
   };
 
   tempId = 0;
 
-  deleteTask = (id) => {
+  deleteTask = (id: number) => {
     this.setState(({ tasks }) => {
       const restTasks = tasks.filter((item) => item.id !== id);
 
@@ -42,11 +50,9 @@ export default class App extends React.Component {
     });
   };
 
-  addTask = (text) => {
-    if (text === '') return;
-
+  addTask = (label: string, min: number, sec: number) => {
     this.setState(({ tasks }) => {
-      const newItem = this.createTodoItem(text);
+      const newItem = this.createTodoItem(label, min, sec);
 
       const newItems = [...tasks, newItem];
 
@@ -56,15 +62,9 @@ export default class App extends React.Component {
     });
   };
 
-  onToggleDone = (id) => {
+  onToggleDone = (id: number) => {
     this.setState(({ tasks }) => ({
       tasks: toggleProperty(tasks, id, 'done'),
-    }));
-  };
-
-  onToggleEdited = (id) => {
-    this.setState(({ tasks }) => ({
-      tasks: toggleProperty(tasks, id, 'edited'),
     }));
   };
 
@@ -86,27 +86,31 @@ export default class App extends React.Component {
     });
   };
 
-  createTodoItem(text) {
-    return {
-      label: text,
-      done: false,
-      created: new Date(),
-      id: this.tempId++,
-    };
-  }
-
-  viewTasks() {
+  viewTasks = (): ITask[] | null => {
     const { tasks, filter } = this.state;
     switch (filter) {
       case 'all':
         return tasks;
       case 'active':
-        return tasks.filter((item) => !item.done);
+        return tasks.filter((item: ITask) => !item.done);
       case 'completed':
         return tasks.filter((item) => item.done);
       default:
         return null;
     }
+  };
+
+  createTodoItem(label: string, min: number, sec: number): ITask {
+    return {
+      label,
+      exTime: {
+        min,
+        sec,
+      },
+      done: false,
+      created: new Date(),
+      id: this.tempId++,
+    };
   }
 
   render() {
@@ -120,19 +124,16 @@ export default class App extends React.Component {
       <section className="todoapp">
         <AppHeader onAdd={this.addTask} />
         <section className="main">
-          <TaskList
-            tasks={viewTasks}
-            onDeleted={this.deleteTask}
-            onToggleDone={this.onToggleDone}
-            onToggleEdited={this.onToggleEdited}
-          />
+          <TaskList tasks={viewTasks} onDeleted={this.deleteTask} onToggleDone={this.onToggleDone} />
 
           <AppFooter
             todoCount={todoCount}
             onDeletedCompleted={this.deleteCompleted}
-            onShowAll={this.onShowAll}
-            onShowActive={this.onShowActive}
-            onShowCompleted={this.onShowCompleted}
+            propsFilter={{
+              onShowAll: this.onShowAll,
+              onShowActive: this.onShowActive,
+              onShowCompleted: this.onShowCompleted,
+            }}
           />
         </section>
       </section>

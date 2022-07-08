@@ -1,9 +1,8 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import React, { FC } from 'react';
 
 import './tasks-filter.css';
 
-function toggleActiveButton(e) {
+function toggleActiveButton(e: any) {
   const list = e.currentTarget;
 
   // eslint-disable-next-line no-restricted-syntax
@@ -15,7 +14,13 @@ function toggleActiveButton(e) {
   e.target.classList.add('selected');
 }
 
-function TasksFilter(props) {
+export interface TasksFilterProps {
+  onShowAll: () => void;
+  onShowActive: () => void;
+  onShowCompleted: () => void;
+}
+
+const TasksFilter: FC<TasksFilterProps> = (props) => {
   const { onShowAll, onShowActive, onShowCompleted } = props;
 
   return (
@@ -38,18 +43,6 @@ function TasksFilter(props) {
       </li>
     </ul>
   );
-}
-
-TasksFilter.defaultProps = {
-  onShowAll: () => {},
-  onShowActive: () => {},
-  onShowCompleted: () => {},
-};
-
-TasksFilter.propTypes = {
-  onShowAll: propTypes.func,
-  onShowActive: propTypes.func,
-  onShowCompleted: propTypes.func,
 };
 
 export default TasksFilter;

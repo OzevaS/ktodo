@@ -70,57 +70,85 @@
 }
 
 .todo-list li label .description {
-  word-break: break-all;
-  display: block;
-  line-height: 1.2;
-  transition: color 0.4s;
-  font-weight: 400;
-  color: #4d4d4d;
+	font-size: 13px;
+	color: gray;
 }
 
-.todo-list li.completed label .description {
-  color: #cdcdcd;
-  text-decoration: line-through;
+.todo-list li label .title {
+	word-break: break-all;
+	display: block;
+	line-height: 1.2;
+	transition: color 0.4s;
+	font-weight: 400;
+	color: #4d4d4d;
+}
+
+.todo-list li.completed label .title {
+	color: #cdcdcd;
+	text-decoration: line-through;
 }
 
 .todo-list li .icon {
-  position: absolute;
-  top: 0;
-  bottom: -3px;
-  width: 30px;
-  height: 40px;
-  font-size: 34px;
-  color: #cc9a9a;
-  margin: auto 0 11px;
-  transition: color 0.2s ease-out;
-  cursor: pointer;
+	width: 30px;
+	height: 40px;
+	font-size: 34px;
+	color: #cc9a9a;
+	margin: auto 0;
+	transition: color 0.2s ease-out;
+	cursor: pointer;
 }
 
 .todo-list li .icon:hover {
-  color: #af5b5e;
+	color: #af5b5e;
 }
 
 .todo-list li .icon-destroy {
-  right: 10px;
+	position: absolute;
+	top: 0;
+	bottom: -3px;
+	right: 10px;
 }
 
 .todo-list li .icon-destroy:after {
-  content: '×';
+	content: '×';
 }
 
 .todo-list li .icon-edit {
-  font-size: 19px;
-  right: 45px;
+	position: absolute;
+	top: 0;
+	bottom: -3px;
+	font-size: 19px;
+	right: 45px;
 }
 
 .todo-list li .icon-edit:after {
-  content: '✎';
-}
-
-.todo-list li .edit {
-  display: none;
+	content: '✎';
 }
 
 .todo-list li.editing:last-child {
   margin-bottom: -1px;
+}
+
+.todo-list li .icon-pause,
+.todo-list li .icon-play {
+  display: inline-block;
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+}
+
+.todo-list li .icon-play {
+	font-size: 15px;
+}
+
+.todo-list li .icon-pause {
+  margin-right: 10px;
+}
+
+.icon-pause:after {
+	content: '⏸';
+}
+
+.icon-play:after {
+	content: '▶';
 }
