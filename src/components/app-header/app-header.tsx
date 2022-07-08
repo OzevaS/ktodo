@@ -1,11 +1,14 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import React, { FC } from 'react';
 
 import NewTaskForm from '../new-task-form';
 
 import './app-header.css';
 
-function AppHeader(props) {
+interface AppHeaderProps {
+  onAdd: (label: string, min: number, sec: number) => void;
+}
+
+const AppHeader: FC<AppHeaderProps> = (props) => {
   const { onAdd } = props;
 
   return (
@@ -14,14 +17,6 @@ function AppHeader(props) {
       <NewTaskForm onAdd={onAdd} />
     </header>
   );
-}
-
-AppHeader.defaultProps = {
-  onAdd: () => {},
-};
-
-AppHeader.propTypes = {
-  onAdd: propTypes.func,
 };
 
 export default AppHeader;

@@ -30,9 +30,8 @@ export default class DistToNow extends React.Component<DistToNowProps, DistToNow
   }
 
   componentWillUnmount() {
-    const  {idInterval} = this.state;
-    if (idInterval !== null)
-      clearInterval(idInterval);
+    const { idInterval } = this.state;
+    if (idInterval !== null) clearInterval(idInterval);
   }
 
   update(id: NodeJS.Timer) {

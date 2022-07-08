@@ -34,7 +34,7 @@ export default class NewTaskForm extends React.Component<NewTaskFormProps, NewTa
     if (e.key !== 'Enter') return;
 
     const { label, min, sec } = this.state;
-    
+
     if (!label || min === '' || sec === '') return;
     if (+sec < 0 || +sec > 60) return;
     if (+min < 0) return;

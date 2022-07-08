@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import TasksFilter, {TasksFilterProps} from '../tasks-filter';
+import TasksFilter, { TasksFilterProps } from '../tasks-filter';
 
 import './app-footer.css';
 
