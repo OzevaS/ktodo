@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 
 import './dist-to-now.css';
@@ -12,39 +12,30 @@ interface DistToNowProps {
   intervalTime?: number;
 }
 
-export default class DistToNow extends React.Component<DistToNowProps, DistToNowState> {
-  state = {
-    idInterval: null,
-  };
+const DistToNow: FC<DistToNowProps> = (props) => {
+  const { created, intervalTime } = props;
 
-  static defaultProps = {
-    intervalTime: 5000,
-  };
+  const [idIntervalState, setIdIntervalState] = useState<DistToNowState['idInterval']>(null);
 
-  componentDidMount() {
-    const { intervalTime } = this.props;
-
-    const id = setInterval(() => {
-      this.update(id);
+  useEffect(() => {
+    const idInterval = setInterval(() => {
+      setIdIntervalState(idInterval);
     }, intervalTime);
-  }
 
-  componentWillUnmount() {
-    const { idInterval } = this.state;
-    if (idInterval !== null) clearInterval(idInterval);
-  }
+    return () => {
+      clearInterval(idInterval);
+    };
+  }, [intervalTime]);
 
-  update(id: NodeJS.Timer) {
-    this.setState({
-      idInterval: id,
-    });
-  }
+  const distToNow = formatDistanceToNow(created, {
+    includeSeconds: true,
+  });
 
-  render() {
-    const distToNow = formatDistanceToNow(this.props.created, {
-      includeSeconds: true,
-    });
+  return <span className="created">{distToNow}</span>;
+};
 
-    return <span className="created">{distToNow}</span>;
-  }
-}
+DistToNow.defaultProps = {
+  intervalTime: 5000,
+};
+
+export default DistToNow;

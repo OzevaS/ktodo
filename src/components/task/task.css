@@ -142,7 +142,7 @@
 }
 
 .todo-list li .icon-pause {
-  margin-right: 10px;
+  margin-right: 10px !important;
 }
 
 .icon-pause:after {

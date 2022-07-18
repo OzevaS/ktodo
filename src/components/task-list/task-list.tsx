@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 
-import Task from '../task/task';
 import './task-list.css';
+
+import Task from '../task/task';
 import { ITask } from '../../types';
 
 interface TaskListProps {
